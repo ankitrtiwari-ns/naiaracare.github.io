@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <title>NAIARA — Orthopaedic Rehabilitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            naiara: { 
+                void: '#031A17',   
+                forest: '#133B32', 
+                teal: '#2A7F72',   
+                cream: '#F7F5EB',  
+                gold: '#C5A059'
+            }
+          },
+          fontFamily: { 
+            serif: ['Cinzel', 'serif'],
+            sans: ['Montserrat', 'sans-serif'] 
+          },
+          animation: {
+            'breath': 'breath 8s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'fade-up': 'fadeUp 1.5s ease-out forwards',
+          },
+          keyframes: {
+            breath: {
+              '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.05)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #031A17; color: #F7F5EB; overflow-x: hidden; }
+    
+    .atmosphere {
+        background: radial-gradient(circle at 50% 40%, #2A7F72 0%, #133B32 40%, #031A17 80%);
+        opacity: 0.7;
+        animation: breath 12s infinite;
+    }
+    
+    .glass-panel {
+        background: rgba(247, 245, 235, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(247, 245, 235, 0.15);
+        box-shadow: 0 4px 40px rgba(42, 127, 114, 0.15);
+    }
+
+    .glass-panel-dark {
+        background: rgba(3, 26, 23, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(42, 127, 114, 0.3);
+    }
+
+    .text-glow { text-shadow: 0 0 40px rgba(247, 245, 235, 0.2); }
+    
+    ::selection { background: #2A7F72; color: #F7F5EB; }
+
+    /* Mobile Menu Transitions */
+    #mobile-menu { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .menu-closed { transform: translateX(100%); }
+    .menu-open { transform: translateX(0); }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-naiara-teal selection:text-white">
+
+  <div class="fixed inset-0 z-0 pointer-events-none atmosphere"></div>
+  <div class="fixed inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
+
+  <header class="fixed top-0 w-full z-50 border-b border-naiara-cream/10 bg-naiara-void/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      
+      <div class="flex flex-col group cursor-default">
+        <span class="font-serif text-2xl tracking-widest font-bold text-naiara-cream group-hover:text-naiara-teal transition duration-700">NAIARA</span>
+        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naiara-cream/60">Orthopaedic Rehabilitation</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-8 text-xs tracking-widest text-naiara-cream/80">
+            <a href="catalog.html" class="hover:text-white hover:scale-105 transition duration-300">CATALOG</a>
+            <a href="contact.html" class="hover:text-white hover:scale-105 transition duration-300">CONTACT</a>
+        </nav>
+        
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-naiara-cream/10 border border-naiara-cream/10 shadow-[0_0_15px_rgba(42,127,114,0.3)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-naiara-teal animate-pulse"></span>
+            <span class="text-[0.6rem] font-mono uppercase tracking-widest text-naiara-cream/80">System: Active</span>
+        </div>
+
+        <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-naiara-void/95 backdrop-blur-xl menu-closed flex flex-col justify-center items-center gap-8 md:hidden">
+        
+        <button id="close-btn" class="absolute top-6 right-6 text-white/50 hover:text-white p-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <span class="text-[0.6rem] font-mono uppercase tracking-[0.2em] text-naiara-teal mb-4">NAVIGATION</span>
+        
+        <a href="index.html" class="text-3xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300">HOME</a>
+        <a href="catalog.html" class="text-3xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300">CATALOG</a>
+        <a href="contact.html" class="text-3xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300">CONTACT</a>
+        
+        <div class="mt-12 flex items-center gap-2 px-4 py-2 rounded-full bg-naiara-cream/5 border border-naiara-cream/10">
+            <span class="w-2 h-2 rounded-full bg-naiara-teal animate-pulse"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-naiara-cream/60">System Online</span>
+        </div>
+    </div>
+  </header>
+  <section class="relative min-h-screen flex items-center justify-center z-10 pt-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      
+      <p class="text-xs font-mono tracking-[0.4em] text-naiara-teal mb-6 animate-float font-semibold brightness-125">ENGINEERED STABILITY</p>
+      
+      <h1 class="text-5xl md:text-8xl font-serif font-medium text-white leading-[1.1] text-glow mix-blend-lighten animate-fade-up">
+        ALIGNMENT<br>
+        <span class="text-naiara-cream/40 italic font-light text-6xl md:text-7xl">IS</span><br>
+        MEDICINE.
+      </h1>
+      
+      <p class="mt-10 text-lg md:text-xl font-light text-naiara-cream/90 max-w-2xl mx-auto leading-relaxed" style="animation-duration: 6s;">
+        We do not just support the joint.<br>We reconstruct the <span class="text-white border-b border-naiara-teal pb-0.5 shadow-[0_1px_0_rgba(42,127,114,0.5)]">confidence of motion</span>.
+      </p>
+
+      <div class="mt-16 flex flex-col items-center justify-center gap-4">
+        <a href="catalog.html" class="group relative px-12 py-4 overflow-hidden rounded-sm glass-panel hover:bg-naiara-cream/10 transition duration-500">
+            <div class="absolute inset-0 w-0 bg-naiara-teal/30 transition-all duration-[400ms] ease-out group-hover:w-full opacity-30"></div>
+            <span class="relative text-sm font-serif tracking-[0.2em] text-white font-medium">VIEW THE COLLECTION</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-32 relative z-10">
+    <div class="max-w-5xl mx-auto px-6">
+      
+      <div class="glass-panel-dark p-10 md:p-20 rounded-sm border-t border-naiara-cream/20 shadow-2xl relative overflow-hidden">
+        
+        <div class="absolute top-0 right-0 w-64 h-64 bg-naiara-teal/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                
+                <div class="md:w-1/3">
+                    <span class="font-mono text-[0.6rem] text-naiara-teal tracking-widest font-bold brightness-125 uppercase mb-4 block">Our Origin</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white leading-tight">
+                        The Architecture of <span class="italic text-naiara-cream/50">Healing.</span>
+                    </h2>
+                    <div class="mt-8 h-px w-16 bg-naiara-teal shadow-[0_0_10px_rgba(42,127,114,0.8)]"></div>
+                </div>
+
+                <div class="md:w-2/3">
+                    <p class="text-naiara-cream/80 text-lg font-light leading-relaxed mb-6">
+                        NAIARA was born from a singular observation: traditional orthopaedics treats the body as a broken machine, rather than a living architecture.
+                    </p>
+                    <p class="text-naiara-cream/60 text-sm font-light leading-relaxed mb-8">
+                        Rooted in the clinical precision of <strong>Guruji Surgical & Healthcare</strong>, we bridge the gap between medical utility and aesthetic dignity. We believe that recovery should not look like a burden. It should feel like an upgrade. Every fiber we weave is a calculation of tension, support, and grace.
+                    </p>
+                    
+                    <a href="contact.html" class="inline-flex items-center gap-2 text-[0.6rem] uppercase tracking-widest text-white border-b border-white/20 pb-1 hover:border-naiara-teal transition">
+                        Connect with the Firm
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-24 relative z-10 opacity-80 hover:opacity-100 transition duration-1000">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 mix-blend-screen">
+        
+        <div class="text-left border-l border-naiara-teal/60 pl-4">
+            <div class="text-3xl font-serif text-white">ISO</div>
+            <div class="text-[0.5rem] tracking-widest text-naiara-cream/70 uppercase">International<br>Standard</div>
+        </div>
+        
+        <div class="text-left border-l border-naiara-teal/60 pl-4">
+            <div class="text-3xl font-serif text-white">GMP</div>
+            <div class="text-[0.5rem] tracking-widest text-naiara-cream/70 uppercase">Good Mfg.<br>Practice</div>
+        </div>
+        
+        <div class="text-left border-l border-naiara-teal/60 pl-4">
+            <div class="text-3xl font-serif text-white">CE</div>
+            <div class="text-[0.5rem] tracking-widest text-naiara-cream/70 uppercase">European<br>Conformity</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-12 border-t border-naiara-cream/10 relative z-10 bg-naiara-void">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-end text-[0.6rem] text-naiara-cream/50 uppercase tracking-widest font-mono">
+      <div class="mb-4 md:mb-0">
+        <p class="text-naiara-cream mb-2">NAIARA REHABILITATION</p>
+        <p>Restoring Motion since 2021</p>
+      </div>
+      <div class="text-right">
+        <p class="mb-2">Support: info@naiaracare.com</p>
+        <p>Global Shipping Available</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('menu-closed');
+        mobileMenu.classList.add('menu-open');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('menu-open');
+        mobileMenu.classList.add('menu-closed');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <title>NAIARA — The Index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            naiara: { void: '#031A17', forest: '#133B32', teal: '#2A7F72', cream: '#F7F5EB' }
+          },
+          fontFamily: { serif: ['Cinzel', 'serif'], sans: ['Montserrat', 'sans-serif'] },
+          animation: { 'breath': 'breath 8s ease-in-out infinite', 'fade-up': 'fadeUp 1.5s ease-out forwards' },
+          keyframes: {
+            breath: { '0%, 100%': { opacity: '0.8', transform: 'scale(1)' }, '50%': { opacity: '1', transform: 'scale(1.05)' } },
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #031A17; color: #F7F5EB; overflow-x: hidden; }
+    .atmosphere { background: radial-gradient(circle at 50% 10%, #2A7F72 0%, #133B32 40%, #031A17 80%); opacity: 0.6; animation: breath 12s infinite; }
+    .glass-panel { background: rgba(247, 245, 235, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(247, 245, 235, 0.15); box-shadow: 0 4px 40px rgba(42, 127, 114, 0.15); }
+    ::selection { background: #2A7F72; color: #F7F5EB; }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <div class="fixed inset-0 z-0 pointer-events-none atmosphere"></div>
+  <div class="fixed inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
+
+  <header class="fixed top-0 w-full z-50 border-b border-naiara-cream/10 bg-naiara-void/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex flex-col group cursor-default">
+        <span class="font-serif text-2xl tracking-widest font-bold text-naiara-cream group-hover:text-naiara-teal transition duration-700">NAIARA</span>
+        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naiara-cream/60">Orthopaedic Rehabilitation</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-8 text-xs tracking-widest text-naiara-cream/80">
+            <a href="catalog.html" class="text-white border-b border-naiara-teal">CATALOG</a>
+            <a href="contact.html" class="hover:text-white transition">CONTACT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-40 pb-20 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-20 animate-fade-up">
+        <p class="text-xs font-mono tracking-[0.4em] text-naiara-teal mb-4 uppercase">The Archive</p>
+        <h1 class="text-5xl md:text-7xl font-serif text-white mb-6">ORTHOPAEDIC INDEX</h1>
+        <!--<p class="text-naiara-cream/60 font-light max-w-xl mx-auto">Select the anatomical region requiring stabilization.</p>-->
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-20" id="filters">
+        <button onclick="filterProducts('all')" class="filter-btn px-8 py-3 glass-panel rounded-full text-xs tracking-widest uppercase transition duration-300 border border-white/10 hover:bg-naiara-teal/20 text-white">All Architecture</button>
+        <button onclick="filterProducts('Adult Orthosis')" class="filter-btn px-8 py-3 glass-panel rounded-full text-xs tracking-widest uppercase transition duration-300 border border-white/10 text-naiara-cream/60 hover:text-white">Adult Series</button>
+        <button onclick="filterProducts('Kids Orthosis')" class="filter-btn px-8 py-3 glass-panel rounded-full text-xs tracking-widest uppercase transition duration-300 border border-white/10 text-naiara-cream/60 hover:text-white">Pediatric</button>
+        <button onclick="filterProducts('Surgical Aids')" class="filter-btn px-8 py-3 glass-panel rounded-full text-xs tracking-widest uppercase transition duration-300 border border-white/10 text-naiara-cream/60 hover:text-white">Surgical Aids</button>
+    </div>
+
+    <div id="product-grid" class="grid md:grid-cols-3 gap-8">
+        </div>
+  </main>
+
+  <footer class="py-12 border-t border-naiara-cream/10 relative z-10 bg-naiara-void">
+    <div class="max-w-7xl mx-auto px-6 text-center text-[0.6rem] text-naiara-cream/50 uppercase tracking-widest font-mono">
+        <p>NAIARA REHABILITATION — Restoring Motion since 2021</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script> 
+  
+  <script>
+    function renderProducts(categoryFilter) {
+        const grid = document.getElementById('product-grid');
+        grid.innerHTML = ''; 
+
+        for (const key in products) {
+            const item = products[key];
+            if (categoryFilter !== 'all' && item.category !== categoryFilter) continue;
+
+            const card = document.createElement('a');
+            // Ensure ID matches exactly what is in products.js
+            card.href = `product.html?id=${key}`; 
+            card.className = "glass-panel p-8 rounded-sm hover:border-naiara-teal/50 transition duration-500 group cursor-pointer animate-fade-up flex flex-col";
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-6">
+                    <span class="text-[0.6rem] font-mono text-naiara-teal tracking-widest">${item.code}</span>
+                    <span class="text-[0.6rem] font-mono text-naiara-cream/30">STOCK: AVAILABLE</span>
+                </div>
+                
+                <div class="h-80 w-full bg-naiara-forest/10 rounded-sm mb-6 flex items-center justify-center border border-white/5 overflow-hidden relative">
+                    <img src="${item.image}" alt="${item.title}" 
+                         class="h-full w-full object-contain mix-blend-screen opacity-100 group-hover:scale-105 transition duration-700" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <span class="text-xs text-white/20 uppercase tracking-widest hidden absolute">[Image Missing]</span>
+                </div>
+
+                <div class="mt-auto">
+                    <h3 class="font-serif text-xl text-white mb-2">${item.title}</h3>
+                    <p class="text-xs text-naiara-cream/60 mb-6 leading-relaxed line-clamp-2">${item.description}</p>
+                    <div class="flex items-center gap-2 opacity-60 group-hover:opacity-100 transition">
+                        <span class="text-[0.6rem] uppercase tracking-widest text-white">Inspect Data</span>
+                        <span class="text-naiara-teal">→</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+    }
+
+    renderProducts('all');
+
+    function filterProducts(cat) {
+        renderProducts(cat);
+    }
+  </script>
+
+</body>
+</html>

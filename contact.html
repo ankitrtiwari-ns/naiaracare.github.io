@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <title>NAIARA — Say Hello</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            naiara: { 
+                void: '#031A17',
+                forest: '#133B32',
+                teal: '#2A7F72',
+                cream: '#F7F5EB',
+            }
+          },
+          fontFamily: { 
+            serif: ['Cinzel', 'serif'],
+            sans: ['Montserrat', 'sans-serif'] 
+          },
+          animation: {
+            'breath': 'breath 8s ease-in-out infinite',
+            'fade-up': 'fadeUp 1.5s ease-out forwards',
+          },
+          keyframes: {
+            breath: {
+              '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.05)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #031A17; color: #F7F5EB; overflow-x: hidden; }
+    
+    .atmosphere {
+        background: radial-gradient(circle at 80% 80%, #2A7F72 0%, #133B32 30%, #031A17 70%);
+        opacity: 0.6;
+        animation: breath 12s infinite;
+    }
+    
+    .glass-panel {
+        background: rgba(247, 245, 235, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(247, 245, 235, 0.15);
+        box-shadow: 0 4px 40px rgba(42, 127, 114, 0.15);
+    }
+    
+    input, textarea, select {
+        background: rgba(3, 26, 23, 0.6);
+        border: 1px solid rgba(247, 245, 235, 0.1);
+        color: #F7F5EB;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        border-color: #2A7F72;
+        background: rgba(3, 26, 23, 0.9);
+        box-shadow: 0 0 15px rgba(42, 127, 114, 0.2);
+    }
+
+    ::placeholder { color: rgba(247, 245, 235, 0.3); }
+    ::selection { background: #2A7F72; color: #F7F5EB; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-naiara-teal selection:text-white">
+
+  <div class="fixed inset-0 z-0 pointer-events-none atmosphere"></div>
+  <div class="fixed inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
+
+  <header class="fixed top-0 w-full z-50 border-b border-naiara-cream/10 bg-naiara-void/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex flex-col group cursor-default">
+        <span class="font-serif text-2xl tracking-widest font-bold text-naiara-cream group-hover:text-naiara-teal transition duration-700">NAIARA</span>
+        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naiara-cream/60">Orthopaedic Rehabilitation</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-8 text-xs tracking-widest text-naiara-cream/80">
+            <a href="catalog.html" class="hover:text-white hover:scale-105 transition duration-300">CATALOG</a>
+            <a href="contact.html" class="text-white border-b border-naiara-teal">CONTACT</a>
+        </nav>
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-naiara-cream/10 border border-naiara-cream/10 shadow-[0_0_15px_rgba(42,127,114,0.3)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-naiara-teal animate-pulse"></span>
+            <span class="text-[0.6rem] font-mono uppercase tracking-widest text-naiara-cream/80">System: Active</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 min-h-screen flex items-center justify-center pt-20 px-6">
+    <div class="max-w-6xl w-full grid md:grid-cols-[1fr_1.5fr] gap-12 items-start animate-fade-up">
+        
+        <div class="glass-panel p-10 rounded-sm md:sticky md:top-32">
+            <p class="text-xs font-mono tracking-[0.4em] text-naiara-teal mb-8">DIRECT CHANNEL</p>
+            
+            <div class="mb-10">
+                <h2 class="font-serif text-2xl text-white mb-2">Institutional Inquiries</h2>
+                <p class="text-naiara-cream/60 text-sm font-light leading-relaxed">
+                    For bulk procurement, hospital partnerships, or custom fitting requests.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="border-l border-naiara-teal/30 pl-4">
+                    <p class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/40 mb-1">Response Time</p>
+                    <p class="text-sm text-white font-mono">Within 24 Hours</p>
+                </div>
+                <div class="border-l border-naiara-teal/30 pl-4">
+                    <p class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/40 mb-1">Email</p>
+                    <p class="text-sm text-white font-mono">sales@naiaracare.com</p>
+                </div>
+                <div class="border-l border-naiara-teal/30 pl-4">
+                    <p class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/40 mb-1">HQ Location</p>
+                    <p class="text-sm text-white font-mono">Mumbai,<br>India.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel p-10 md:p-14 rounded-sm">
+             <h1 class="text-3xl font-serif text-white mb-10">Leave A Message.</h1>
+             
+             <form class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/60">Name</label>
+                        <input type="text" class="w-full p-4 rounded-sm focus:ring-0" placeholder="Dr. S. Gupta">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/60">Email</label>
+                        <input type="email" class="w-full p-4 rounded-sm focus:ring-0" placeholder="email@hospital.com">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/60">Subject</label>
+                    <select class="w-full p-4 rounded-sm focus:ring-0 cursor-pointer">
+                        <option>General Inquiry</option>
+                        <option>Product Defect / Support</option>
+                        <option>Hospital Procurement</option>
+                        <option>Custom Fitting</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-[0.6rem] uppercase tracking-widest text-naiara-cream/60">Message</label>
+                    <textarea rows="6" class="w-full p-4 rounded-sm focus:ring-0 resize-none" placeholder="Describe the requirements..."></textarea>
+                </div>
+
+                <button type="button" class="mt-4 w-full py-4 bg-naiara-teal/20 border border-naiara-teal text-white text-xs tracking-[0.2em] uppercase hover:bg-naiara-teal hover:text-white transition duration-500">
+                    Send
+                </button>
+
+             </form>
+        </div>
+
+    </div>
+  </main>
+
+  <footer class="py-12 border-t border-naiara-cream/10 relative z-10 bg-naiara-void">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-end text-[0.6rem] text-naiara-cream/50 uppercase tracking-widest font-mono">
+      <div>
+        <p class="text-naiara-cream mb-2">NAIARA REHABILITATION</p>
+        <p>Restoring Motion since 2021</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
