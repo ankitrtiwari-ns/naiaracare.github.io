@@ -2,8 +2,11 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <title>NAIARA — Products</title>
+  <title>NAIARA — Product Architecture</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   
@@ -30,6 +33,12 @@
     .glass-panel { background: rgba(247, 245, 235, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(247, 245, 235, 0.15); box-shadow: 0 4px 40px rgba(42, 127, 114, 0.15); }
     .tech-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(247, 245, 235, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(247, 245, 235, 0.05) 1px, transparent 1px); }
     ::selection { background: #2A7F72; color: #F7F5EB; }
+    
+    /* MENU ANIMATIONS */
+    .drawer-open { transform: translateX(0%); }
+    .drawer-closed { transform: translateX(100%); }
+    .backdrop-open { opacity: 1; pointer-events: auto; backdrop-filter: blur(8px); }
+    .backdrop-closed { opacity: 0; pointer-events: none; backdrop-filter: blur(0px); }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -37,21 +46,56 @@
   <div class="fixed inset-0 z-0 pointer-events-none atmosphere"></div>
   <div class="fixed inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
 
-  <header class="fixed top-0 w-full z-50 border-b border-naiara-cream/10 bg-naiara-void/80 backdrop-blur-md">
+  <header class="fixed top-0 w-full z-50 border-b border-naiara-cream/10 bg-naiara-void/90 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex flex-col group cursor-default">
+      
+      <a href="index.html" class="flex flex-col group cursor-pointer">
         <span class="font-serif text-2xl tracking-widest font-bold text-naiara-cream group-hover:text-naiara-teal transition duration-700">NAIARA</span>
         <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naiara-cream/60">Orthopaedic Rehabilitation</span>
-      </div>
+      </a>
+
       <div class="flex items-center gap-6">
         <nav class="hidden md:flex gap-8 text-xs tracking-widest text-naiara-cream/80">
             <a href="catalog.html" class="hover:text-white transition">CATALOG</a>
             <a href="contact.html" class="hover:text-white transition">CONTACT</a>
         </nav>
+        
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-naiara-cream/10 border border-naiara-cream/10 shadow-[0_0_15px_rgba(42,127,114,0.3)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-naiara-teal animate-pulse"></span>
+            <span class="text-[0.6rem] font-mono uppercase tracking-widest text-naiara-cream/80">System: Active</span>
+        </div>
+
+        <button id="menu-btn" class="md:hidden text-white focus:outline-none p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
       </div>
     </div>
-  </header>
 
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md z-40 backdrop-closed transition-all duration-500"></div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-3/4 max-w-sm bg-[#021210] border-l border-white/10 z-50 drawer-closed transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl">
+        <div class="p-8 flex flex-col h-full relative">
+            <button id="close-btn" class="absolute top-6 right-6 text-white/50 hover:text-white p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <span class="text-[0.6rem] font-mono uppercase tracking-[0.2em] text-naiara-teal mb-12 mt-2">NAVIGATION</span>
+            
+            <div class="flex flex-col gap-8">
+                <a href="index.html" class="text-xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300 border-b border-white/5 pb-4">HOME</a>
+                <a href="catalog.html" class="text-xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300 border-b border-white/5 pb-4">CATALOG</a>
+                <a href="contact.html" class="text-xl font-serif text-white tracking-widest hover:text-naiara-teal transition duration-300 border-b border-white/5 pb-4">CONTACT</a>
+            </div>
+            
+            <div class="mt-auto">
+                <div class="flex items-center gap-3 px-4 py-3 rounded-sm bg-naiara-cream/5 border border-naiara-cream/10">
+                    <span class="w-2 h-2 rounded-full bg-naiara-teal animate-pulse"></span>
+                    <span class="text-[0.6rem] font-mono uppercase tracking-widest text-naiara-cream/60">System Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
   <main class="relative z-10 pt-32 pb-20 px-6 max-w-7xl mx-auto">
     
     <div class="mb-8 text-[0.6rem] uppercase tracking-widest text-naiara-cream/40 font-mono">
@@ -65,8 +109,15 @@
             <div class="glass-panel w-full aspect-[4/5] rounded-sm flex items-center justify-center tech-grid relative overflow-hidden group">
                 
                 <img id="product-image" src="" alt="Product Render" 
-                     class="w-full h-full object-contain mix-blend-screen opacity-100 p-10 group-hover:scale-105 transition duration-700">
+                     class="w-full h-full object-contain mix-blend-screen opacity-100 p-10 group-hover:scale-105 transition duration-700" 
+                     onerror="this.style.display='none'; document.getElementById('img-placeholder').style.display='flex'">
                 
+                <div id="img-placeholder" class="hidden text-center p-10 flex-col items-center justify-center absolute inset-0">
+                    <div class="w-32 h-32 border border-white/20 rounded-full mb-4 flex items-center justify-center">
+                        <span class="text-xs text-white/30">VISUAL PENDING</span>
+                    </div>
+                </div>
+
                 <div class="absolute top-4 left-4 text-[0.5rem] font-mono text-naiara-teal">FIG. 01</div>
                 <div class="absolute bottom-4 right-4 text-[0.5rem] font-mono text-naiara-teal">SCALE 1:1</div>
             </div>
@@ -105,7 +156,7 @@
 
             <a id="whatsapp-btn" href="#" target="_blank" class="group relative w-full bg-naiara-teal/10 border border-naiara-teal hover:bg-naiara-teal transition duration-500 py-4 flex items-center justify-center gap-4 rounded-sm overflow-hidden">
                 <div class="absolute inset-0 w-0 bg-white/10 group-hover:w-full transition-all duration-700 ease-out"></div>
-                <span class="relative text-xs font-serif tracking-[0.2em] text-white font-medium">REQUEST INFORMATION</span>
+                <span class="relative text-xs font-serif tracking-[0.2em] text-white font-medium">REQUEST ALLOCATION</span>
             </a>
             
         </div>
@@ -140,7 +191,6 @@
         document.getElementById('product-category').innerText = product.category;
         document.getElementById('product-uses').innerText = product.uses;
         
-        // Image Injection
         const imgEl = document.getElementById('product-image');
         imgEl.src = product.image;
         imgEl.alt = product.title;
@@ -159,7 +209,36 @@
     } else {
         document.getElementById('product-title').innerText = "System Error";
         document.getElementById('product-desc').innerText = "The requested architectural component was not found in the archive.";
+        document.getElementById('img-placeholder').style.display = 'flex';
+        document.getElementById('product-image').style.display = 'none';
     }
+
+    // MENU SCRIPT
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuBackdrop = document.getElementById('menu-backdrop');
+
+    function toggleMenu() {
+        const isClosed = mobileMenu.classList.contains('drawer-closed');
+        if (isClosed) {
+            mobileMenu.classList.remove('drawer-closed');
+            mobileMenu.classList.add('drawer-open');
+            
+            menuBackdrop.classList.remove('backdrop-closed');
+            menuBackdrop.classList.add('backdrop-open');
+        } else {
+            mobileMenu.classList.remove('drawer-open');
+            mobileMenu.classList.add('drawer-closed');
+            
+            menuBackdrop.classList.remove('backdrop-open');
+            menuBackdrop.classList.add('backdrop-closed');
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+    menuBackdrop.addEventListener('click', toggleMenu);
   </script>
 
 </body>
